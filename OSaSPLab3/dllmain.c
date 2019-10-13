@@ -116,8 +116,8 @@ OSASPLABAPI int WINAPI FindAndReplaceString(const char *const findWhat, const ch
 		queryResult = VirtualQuery(currentAddress, &mbi, sizeof(mbi));
 		if (queryResult && (mbi.State == MEM_COMMIT) && (mbi.Protect == PAGE_READWRITE || mbi.Protect == PAGE_EXECUTE_READWRITE
 				|| mbi.Protect == PAGE_EXECUTE_WRITECOPY || mbi.Protect == PAGE_WRITECOPY)) {
-			// this memory has been allocated and is readable and writeable, so it may contain the string
-			// this also means that I can replace it
+			// this memory has been allocated and is readable and writeable, so it can contain the string
+			//currentAddress = mbi.BaseAddress;
 			DWORD stringPos = 0;
 			for (DWORD i = 0; i < mbi.RegionSize - findWhatLength; i++) {
 				if ((findWhat[stringPos] == ((char *)mbi.BaseAddress)[i]) && (stringPos < findWhatLength)) stringPos++;
